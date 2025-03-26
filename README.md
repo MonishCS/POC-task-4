@@ -81,6 +81,32 @@ step 3: Fixing the Security Issues
 
 📌 SUMMARY:
 
+   This Proof of Concept (PoC) demonstrates how misconfigured SUID permissions can lead to privilege escalation and how to mitigate these risks effectively.
+
+🔹 Setup:
+
+Set the SUID bit on /bin/bash (chmod u+s /bin/bash).
+
+Create a root-executed script with SUID permissions (chmod 4755 /root_script.sh).
+
+🔹 Exploitation:
+
+Identify SUID misconfigurations (find / -perm -4000 2>/dev/null).
+
+Escalate privileges to root using (/bin/bash -p).
+
+Execute the root-privileged script as a normal user (./root_script.sh).
+
+🔹 Mitigation:
+
+Remove unnecessary SUID permissions (chmod -s /bin/bash).
+
+Restrict execution of sensitive scripts (chown root:trusted_user /root_script.sh, chmod 750 /root_script.sh).
+
+Verify security improvements (ls -l /bin/bash /root_script.sh).
+
+✅ Objective: Understand privilege escalation risks due to SUID misconfigurations and implement security best practices to prevent unauthorized access.
+
 
 
 
